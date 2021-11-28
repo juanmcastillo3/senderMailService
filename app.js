@@ -9,9 +9,7 @@ app.get('/', async (request, response) => {
 });
 
 app.post('/send', async (request, response) => {
-    const name = request.body.name;
-    const email = request.body.email;
-    const message = request.body.message;
+    const { name, email, message } = request.body;
     const result = await sendMail(name, email, message);
     response.status(200).send(result);
 });
@@ -21,8 +19,7 @@ async function sendMail(name, email, message) {
         let transporter = createTransporter();
         let info = await sendMailTransporter(transporter, name, email, message);
         return {
-            "Message sent: %s": info.messageId,
-            "Message url": nodemailer.getTestMessageUrl(info)
+            "Message sent": info.messageId,
         };
     } catch (e) {
         return { "error": e }
@@ -31,13 +28,8 @@ async function sendMail(name, email, message) {
 }
 
 function createTransporter() {
-    let port;
-    if(process.env.NODEMAILER_SECURE) {
-        port = process.env.NODEMAILER_PORT_SECURE;
-    } else {
-        port = process.env.NODEMAILER_PORT;
-    }
-
+    let port = process.env.NODEMAILER_PORT;
+    if(process.env.NODEMAILER_SECURE) port = process.env.NODEMAILER_PORT_SECURE;
     return nodemailer.createTransport({
         host: process.env.NODEMAILER_HOST,
         port: port,
@@ -59,5 +51,5 @@ async function sendMailTransporter(transporter, name, email, message) {
 }
 
 app.listen(PORT, () => {
-    console.log(`Example app listening at http://localhost:${PORT}`)
+    console.log(`App listening at http://localhost:${PORT}`)
 });
