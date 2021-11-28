@@ -7,6 +7,10 @@ let app = express();
 app.use(express.json());
 const PORT = process.env.APP_PORT;
 
+app.get('/', async (request: any, response: any) => {
+    response.status(200).send('app OK');
+});
+
 app.post('/send', async (request: any, response: any) => {
     const name = request.body.name;
     const email = request.body.email;
