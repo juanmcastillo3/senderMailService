@@ -1,6 +1,6 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
-require('dotenv').config()
+require('dotenv').config();
 
 let app = express();
 app.use(express.json());
