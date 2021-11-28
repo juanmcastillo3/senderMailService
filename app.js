@@ -1,9 +1,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
-require('dotenv').config();
 
 let app = express();
-app.use(express.json());
 const PORT = process.env.APP_PORT;
 
 app.get('/', async (request, response) => {
