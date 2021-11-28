@@ -38,6 +38,9 @@ const process = __importStar(require("process"));
 let app = (0, express_1.default)();
 app.use(express_1.default.json());
 const PORT = process.env.APP_PORT;
+app.get('/', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    response.status(200).send('app OK');
+}));
 app.post('/send', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const name = request.body.name;
     const email = request.body.email;
