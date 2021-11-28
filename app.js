@@ -2,7 +2,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 
 let app = express();
-const PORT = process.env.APP_PORT;
+const PORT = process.env.APP_PORT || 8080;
 
 app.get('/', async (request, response) => {
     response.status(200).send('app OK');
